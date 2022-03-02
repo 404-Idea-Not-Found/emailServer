@@ -10,8 +10,7 @@ const express = require("express");
 const helmet = require("helmet");
 const logger = require("morgan");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const mailJobRouter = require("./routes/mailJob");
 
 const app = express();
 
@@ -22,7 +21,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/mail-job", mailJobRouter);
+
+app.use(function (error, req, res, next) {
+  res.status(error.status || 500);
+  res.json({
+    result: error.result,
+    errorMessage: error.message,
+  });
+});
 
 module.exports = app;
