@@ -5,3 +5,8 @@
 .DS_Store
 .env
 .eslintcache
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
