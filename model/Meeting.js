@@ -67,9 +67,6 @@ const meetingSchema = new mongoose.Schema({
     type: [chatSchema],
     default: [],
   },
-  doodle: {
-    type: String,
-  },
   isLive: {
     type: Boolean,
     default: false,
