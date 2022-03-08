@@ -24,41 +24,21 @@ exports.createNewMailJob = async (req, res, next) => {
   }
 };
 
-exports.reCreateMailJob = async (req, res, next) => {
-  const { meetingId, startTime } = req.body;
-
-  try {
-    await agenda.cancel({ "data.meetingId": meetingId });
-    await sendMail(meetingId, "reschedule");
-    await agenda.schedule(new Date(startTime), "send meeting email", {
-      meetingId,
-    });
-
-    res.json({ result: RESPONSE_RESULT.OK });
-  } catch (error) {
-    next(
-      new ErrorWithStatus(
-        error,
-        500,
-        RESPONSE_RESULT.ERROR,
-        ERROR_MESSAGES.FAILED_TO_RECREATE_EMAIL_JOB
-      )
-    );
-  }
-};
-
 exports.deleteMailJob = async (req, res, next) => {
-  const { meetingId, deletedMeetingTitle, deletedMeetingReservation } =
-    req.body;
+  const { meetingId } = req.params;
+  const { deletedMeetingTitle, deletedMeetingReservation } = req.body;
 
   try {
     await agenda.cancel({ "data.meetingId": meetingId });
-    await sendMail(
-      meetingId,
-      "cancel",
-      deletedMeetingTitle,
-      deletedMeetingReservation
-    );
+
+    if (deletedMeetingReservation.length) {
+      await sendMail(
+        meetingId,
+        "cancel",
+        deletedMeetingTitle,
+        deletedMeetingReservation
+      );
+    }
 
     res.json({ result: RESPONSE_RESULT.OK });
   } catch (error) {
