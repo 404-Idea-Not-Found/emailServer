@@ -1,6 +1,6 @@
 const agenda = require("../config/agenda");
 const { RESPONSE_RESULT, ERROR_MESSAGES } = require("../utils/constants");
-const ErrorWithStatus = require("../utils/ErrorwithStatus");
+const ErrorWithStatus = require("../utils/ErrorWithStatus");
 const sendMail = require("../utils/sendMail");
 
 exports.createNewMailJob = async (req, res, next) => {
