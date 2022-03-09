@@ -6,6 +6,8 @@ exports.ERROR_MESSAGES = {
   FAILED_TO_CREATE_EMAIL_JOB: "ERROR: Failed to create email-job.",
   FAILED_TO_DELETE_EMAIL_JOB: "ERROR: Failed to delete email-job.",
   FAILED_TO_RECREATE_EMAIL_JOB: "ERROR: Failed to recreate email-job.",
+  FAILED_TO_ROUTE_REQUEST:
+    "ERROR: Failed to route your request. Please check your URL.",
 };
 exports.RESPONSE_RESULT = {
   ERROR: "error",
