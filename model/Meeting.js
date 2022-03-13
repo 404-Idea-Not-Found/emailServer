@@ -2,14 +2,11 @@
 const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema({
-  sender: {
+  username: {
     type: String,
     required: true,
   },
-  profilePicture: {
-    type: String,
-  },
-  message: {
+  text: {
     type: String,
     required: true,
   },
@@ -74,6 +71,9 @@ const meetingSchema = new mongoose.Schema({
   isEnd: {
     type: Boolean,
     default: false,
+  },
+  ownerSocketId: {
+    type: String,
   },
 });
 
