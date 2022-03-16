@@ -18,9 +18,11 @@ async function sendMail(
   let mailOptions;
 
   if (type === "reservation") {
-    const { _id, reservation, title } = await Meeting.findById(
+    const { _id, reservation, title, isEnd } = await Meeting.findById(
       meetingId
     ).lean();
+
+    if (isEnd) return;
 
     mailOptions = {
       from: process.env.GMAIL_ID,
